@@ -1,9 +1,6 @@
 FROM python:3.9.0-buster
 MAINTAINER REXWU
 
-RUN apt-get update
-RUN apt-get install vim
-
 ENV PYTHONUNBUFFERED 1
 ENV BASE_DIR /usr/local
 ENV APP_DIR $BASE_DIR/app
