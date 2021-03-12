@@ -12,6 +12,8 @@ from drf_yasg import openapi
 from .models import User
 from .serializers import UserSerializer
 
+from .mailHandler import MailHandler
+
 
 @swagger_auto_schema(method='post', request_body=openapi.Schema(
     type=openapi.TYPE_OBJECT,
@@ -59,6 +61,8 @@ class UserList(APIView):
         else:
             if serializer.is_valid():
                 serializer.save()
+                mail = MailHandler(request.data['name'], request.data['email'], User.objects.get(email=request.data['email']).verify_code)
+                mail.verify()
                 return Response(status.HTTP_201_CREATED)
             return Response(status.HTTP_400_BAD_REQUEST)
 
