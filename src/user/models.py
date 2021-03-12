@@ -1,5 +1,6 @@
 import binascii
 import os
+import random
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -22,6 +23,7 @@ class User(models.Model):
     bio = models.TextField(blank=True)
     career = models.CharField(max_length=100, blank=True)
     verify = models.BooleanField(default=False)
+    verify_code = models.CharField(max_length=4, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -30,6 +32,8 @@ class User(models.Model):
     def save(self, *args, **kwargs):
         if not self.token:
             self.token = self.generate_key()
+        if not self.verify_code:
+            self.verify_code = str(random.randrange(1000, 9999))
         return super().save(*args, **kwargs)
 
     @classmethod
