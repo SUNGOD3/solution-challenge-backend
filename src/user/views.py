@@ -21,7 +21,7 @@ from .mailHandler import MailHandler
         'email': openapi.Schema(type=openapi.TYPE_STRING, description='User Email'),
         'password': openapi.Schema(type=openapi.TYPE_STRING, description='User password')
     }),
-    responses={200: '{User Token}', 405: 'METHOD NOT ALLOWED', 400: 'Bad Request'})
+    responses={200: '{User Token}', 403: 'FORBIDDEN', 400: 'Bad Request'})
 @api_view(['POST'])
 def user_login(request):
     try:
@@ -29,7 +29,7 @@ def user_login(request):
         if user.password == request.data['password']:
             return Response({"token": user.token}, status=status.HTTP_200_OK)
         else:
-            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+            return Response(status=status.HTTP_403_FORBIDDEN)
     except User.DoesNotExist:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
