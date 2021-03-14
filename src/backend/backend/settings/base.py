@@ -9,8 +9,8 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-import os
 
+import os
 from pathlib import Path
 
 import environ
@@ -22,7 +22,7 @@ if os.path.exists(env_file):
     environ.Env.read_env(str(env_file))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -45,16 +45,17 @@ DJANGO_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.staticfiles'
 ]
 
 THIRD_PARTY_APPS = [
     'rest_framework',
-    'rest_framework_swagger',
-    'corsheaders'
+    'corsheaders',
+    'drf_yasg'
 ]
 
 LOCAL_APPS = [
-
+    'user'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -138,12 +139,13 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "templates/static/")
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'templates/static/'),
+    os.path.join(BASE_DIR, 'static/'),
 ]
-
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
