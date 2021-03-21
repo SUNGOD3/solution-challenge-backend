@@ -11,5 +11,5 @@ COPY . $APP_DIR
 RUN pip install --upgrade pip
 RUN pip install -r $APP_DIR/requirements/production.txt
 
-WORKDIR $APP_DIR/src/backend
+WORKDIR $APP_DIR/src
 CMD ["uwsgi", "--ini", "uwsgi.ini"]

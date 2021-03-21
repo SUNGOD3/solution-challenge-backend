@@ -138,6 +138,10 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD:src/backend/backend/settings/base.py
+=======
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+>>>>>>> b627058f6635822edce35c79422e454a231cf472:src/backend/settings/base.py
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'templates/static/'),
@@ -147,3 +151,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+<<<<<<< HEAD:src/backend/backend/settings/base.py
+=======
+
+HOST_NAME = env('HOST_NAME')
+>>>>>>> b627058f6635822edce35c79422e454a231cf472:src/backend/settings/base.py
